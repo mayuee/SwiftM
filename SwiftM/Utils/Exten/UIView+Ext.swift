@@ -60,6 +60,15 @@ extension UIView{
             m_top = newValue - m_height
         }
     }
+    
+    var m_right : CGFloat {
+        get {
+            return m_left + m_width
+        }
+        set {
+            m_left = newValue - m_width
+        }
+    }
 
     var m_centerX : CGFloat {
         get {

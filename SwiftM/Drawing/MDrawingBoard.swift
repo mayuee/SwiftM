@@ -10,19 +10,22 @@ import QuartzCore
 
 class MDrawingBoard: UIView {
     
-    ///画的 线 的数组
-    lazy var lineArray : Array = Array<MBrushLine>()
-    ///当前画的一条线
-    var currentLine : MBrushLine? = nil
-    
     ///笔刷
     var paintBrush : MBrush = MBrush(color: .black, width: CGFloat(5.0), cat : .paint)
+    
+    ///当前 brush
+    var curBrush : MBrush!
+
     
     ///橡皮
     lazy var eraserBrush : MBrush = MBrush(color:.white, width: CGFloat(5.0), cat : .eraser)
     
-    ///当前 brush
-    var curBrush : MBrush!
+    ///画的 线 的数组
+    lazy var lineArray : Array = Array<MBrushLine>()
+    ///当前画的一条线
+    var currentLine : MBrushLine? = nil
+
+    weak var superController : UIViewController?
 
     
     ///用于判断当前画板是否为空
@@ -102,6 +105,17 @@ class MDrawingBoard: UIView {
 extension MDrawingBoard : MDrawingSetViewDelegate{
     func pencilSelected() {
         curBrush = paintBrush
+        
+        if superController != nil {
+            let paintSetVC = MPaintBrushSetViewController()
+            superController?.present(paintSetVC, animated: true, completion: {
+                
+            })
+            
+//            XXXX.modalPresentationStyle = UIModalPresentationFullScreen;
+
+
+        }
     }
     
     func eraserSelected() {

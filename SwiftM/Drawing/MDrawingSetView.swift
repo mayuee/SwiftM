@@ -30,7 +30,7 @@ class MDrawingSetView: UIView {
     weak var delegate : MDrawingSetViewDelegate?
     
     var segment : UISegmentedControl?
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .lightGray

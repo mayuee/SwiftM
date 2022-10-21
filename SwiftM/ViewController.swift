@@ -15,6 +15,17 @@ class ViewController: UIViewController {
     let drawingBoard : MDrawingBoard = MDrawingBoard()
     
     var setView : MDrawingSetView?
+    
+    lazy var colorView : MDrawingColorView = {
+        let cv = MDrawingColorView()
+        cv.setColor = {(color : UIColor?)->Void in
+            guard let setColor = color else{
+                return
+            }
+        }
+        
+        return cv
+    }()
         
     override func loadView() {
         isLogin ? super.loadView() : setupVisitorView()
@@ -41,6 +52,7 @@ extension ViewController{
     
     func setupSubViews(){
         drawingBoard.frame = view.bounds
+        drawingBoard.superController = self
         view.addSubview(drawingBoard)
         
         setView = MDrawingSetView(frame: CGRect(x: view.m_width-60, y: 0, width: 60, height: view.m_height))
@@ -49,12 +61,17 @@ extension ViewController{
     }
     
     @objc func historyAction() {
-        let history = MHistoryViewController()
-        self.navigationController?.pushViewController(history, animated: true)
+//        let history = MHistoryViewController()
+        let drawed = MDrawedViewController()
+        self.navigationController?.pushViewController(drawed, animated: true)
     }
 }
 
 
+// MARK: - 画笔设置回调
+extension ViewController{
+    
+}
 
 
 

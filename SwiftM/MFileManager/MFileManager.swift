@@ -10,9 +10,17 @@ import Foundation
 
 class MFileManager: NSObject {
     static let shared = MFileManager()
-    private init(){}
     
-    func checkDictionaryPath:(path : String){
+//    static let shared : MFileManager = {
+//        let temp = MFileManager()
+//        temp.xxx = xxx
+//        return temp
+//    }
+
+    
+    private override init(){}
+    
+    func checkDictionaryPath(path : String){
         let domainsArray = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)
         let domainsPath = domainsArray[0] as URL
         print(domainsPath)

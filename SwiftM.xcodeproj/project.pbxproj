@@ -26,6 +26,11 @@
 		19E97A912901A10600D062E5 /* MColorBox.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97A902901A10600D062E5 /* MColorBox.swift */; };
 		19E97A952901B1F900D062E5 /* MFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97A942901B1F900D062E5 /* MFileManager.swift */; };
 		19E97A972901BD6900D062E5 /* MPresentationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97A962901BD6900D062E5 /* MPresentationController.swift */; };
+		19E97A9C2902B94800D062E5 /* MDrawedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97A9B2902B94800D062E5 /* MDrawedViewController.swift */; };
+		19E97AA12902BC0A00D062E5 /* MDrawedFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97AA02902BC0A00D062E5 /* MDrawedFlowLayout.swift */; };
+		19E97AA62902BC6500D062E5 /* MDrawedViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97AA52902BC6500D062E5 /* MDrawedViewCell.swift */; };
+		19E97AAB2902F4DE00D062E5 /* MDrawingColorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97AAA2902F4DE00D062E5 /* MDrawingColorView.swift */; };
+		19E97AB12903002E00D062E5 /* MPaintBrushSetViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19E97AB02903002E00D062E5 /* MPaintBrushSetViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +76,11 @@
 		19E97A902901A10600D062E5 /* MColorBox.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MColorBox.swift; sourceTree = "<group>"; };
 		19E97A942901B1F900D062E5 /* MFileManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MFileManager.swift; sourceTree = "<group>"; };
 		19E97A962901BD6900D062E5 /* MPresentationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPresentationController.swift; sourceTree = "<group>"; };
+		19E97A9B2902B94800D062E5 /* MDrawedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDrawedViewController.swift; sourceTree = "<group>"; };
+		19E97AA02902BC0A00D062E5 /* MDrawedFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDrawedFlowLayout.swift; sourceTree = "<group>"; };
+		19E97AA52902BC6500D062E5 /* MDrawedViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDrawedViewCell.swift; sourceTree = "<group>"; };
+		19E97AAA2902F4DE00D062E5 /* MDrawingColorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDrawingColorView.swift; sourceTree = "<group>"; };
+		19E97AB02903002E00D062E5 /* MPaintBrushSetViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MPaintBrushSetViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +131,7 @@
 		19BE846C28FF131C00BBD24A /* SwiftM */ = {
 			isa = PBXGroup;
 			children = (
+				19E97AAF2902FFE800D062E5 /* MPaintBrushSetViewController */,
 				19E97A932901B1C500D062E5 /* MFileManager */,
 				19E97A5B290033EB00D062E5 /* Utils */,
 				19BE846D28FF131C00BBD24A /* AppDelegate.swift */,
@@ -158,6 +169,9 @@
 			isa = PBXGroup;
 			children = (
 				19E979EE28FFFE4B00D062E5 /* MHistoryViewController.swift */,
+				19E97A9B2902B94800D062E5 /* MDrawedViewController.swift */,
+				19E97AA52902BC6500D062E5 /* MDrawedViewCell.swift */,
+				19E97AA02902BC0A00D062E5 /* MDrawedFlowLayout.swift */,
 				19E97A962901BD6900D062E5 /* MPresentationController.swift */,
 			);
 			path = History;
@@ -188,6 +202,7 @@
 				19E97A73290063C600D062E5 /* MBrushLine.swift */,
 				19E97A812900F0A300D062E5 /* MBrush.swift */,
 				19E97A862900F7F400D062E5 /* MDrawingSetView.swift */,
+				19E97AAA2902F4DE00D062E5 /* MDrawingColorView.swift */,
 				19E97A902901A10600D062E5 /* MColorBox.swift */,
 			);
 			path = Drawing;
@@ -199,6 +214,14 @@
 				19E97A942901B1F900D062E5 /* MFileManager.swift */,
 			);
 			path = MFileManager;
+			sourceTree = "<group>";
+		};
+		19E97AAF2902FFE800D062E5 /* MPaintBrushSetViewController */ = {
+			isa = PBXGroup;
+			children = (
+				19E97AB02903002E00D062E5 /* MPaintBrushSetViewController.swift */,
+			);
+			path = MPaintBrushSetViewController;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -336,12 +359,17 @@
 				19E97A6F290061B400D062E5 /* MBrushPointModel.swift in Sources */,
 				19E97A672900510600D062E5 /* MDrawingBoard.swift in Sources */,
 				19BE847228FF131C00BBD24A /* ViewController.swift in Sources */,
+				19E97AA62902BC6500D062E5 /* MDrawedViewCell.swift in Sources */,
 				19E97A74290063C600D062E5 /* MBrushLine.swift in Sources */,
+				19E97AB12903002E00D062E5 /* MPaintBrushSetViewController.swift in Sources */,
 				19E97A822900F0A300D062E5 /* MBrush.swift in Sources */,
 				19E97A872900F7F400D062E5 /* MDrawingSetView.swift in Sources */,
+				19E97AAB2902F4DE00D062E5 /* MDrawingColorView.swift in Sources */,
 				19E97A952901B1F900D062E5 /* MFileManager.swift in Sources */,
 				19E979EF28FFFE4B00D062E5 /* MHistoryViewController.swift in Sources */,
 				19E979E928FFFE1400D062E5 /* MBaseViewController.swift in Sources */,
+				19E97A9C2902B94800D062E5 /* MDrawedViewController.swift in Sources */,
+				19E97AA12902BC0A00D062E5 /* MDrawedFlowLayout.swift in Sources */,
 				19BE846E28FF131C00BBD24A /* AppDelegate.swift in Sources */,
 				19E97A912901A10600D062E5 /* MColorBox.swift in Sources */,
 				19E97A972901BD6900D062E5 /* MPresentationController.swift in Sources */,
