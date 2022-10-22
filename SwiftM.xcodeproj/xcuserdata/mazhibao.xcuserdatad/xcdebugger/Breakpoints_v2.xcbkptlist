@@ -7,32 +7,48 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "58B3FC3D-B052-41B1-ABDF-90F633000CBD"
-            shouldBeEnabled = "No"
+            uuid = "13DFFBB5-28E7-4710-A1AA-02BAF82A1AC8"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwiftM/Drawing/MDrawingBoard.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "151"
-            endingLineNumber = "151"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "91"
+            endingLineNumber = "91"
+            landmarkName = "draw(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "AC6A9DEE-A498-406F-BA4B-D09C34C5C7E1"
-            shouldBeEnabled = "No"
+            uuid = "9FB73C4A-F90F-40C8-992C-C9F1C2A75FE9"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "SwiftM/Drawing/MDrawingBoard.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "152"
-            endingLineNumber = "152"
-            landmarkName = "touchesBegan(_:with:)"
+            startingLineNumber = "60"
+            endingLineNumber = "60"
+            landmarkName = "draw(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F672397E-B6F1-48A2-82AA-1E0DF75A0D85"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "SwiftM/Drawing/MDrawingBoard.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "66"
+            endingLineNumber = "66"
+            landmarkName = "draw(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

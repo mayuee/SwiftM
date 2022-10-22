@@ -6,35 +6,107 @@
 //
 
 import Foundation
-
+import UIKit
 
 class MFileManager: NSObject {
+    //以下两行是单例实现
     static let shared = MFileManager()
-    
-//    static let shared : MFileManager = {
-//        let temp = MFileManager()
-//        temp.xxx = xxx
-//        return temp
-//    }
-
-    
     private override init(){}
     
-    func checkDictionaryPath(path : String){
-        let domainsArray = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)
-        let domainsPath = domainsArray[0] as URL
-        print(domainsPath)
-
-    }
+    lazy var storeDirPath : URL =  {
+        var doc = documentDirectory()
+        let dirPath: URL = doc.appendingPathComponent("storage")
+        checkDictionaryPath(path: dirPath)
+        return dirPath
+    }()
+    
+    
+    
 }
 
+// MARK: -- 公共方法
 extension MFileManager{
-    func checkDictionaryPathsssss(path : String){
-        
+    func documentDirectory() -> URL {
+        let domainsArray = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)
+        let domainsPath = domainsArray[0] as URL
+        return domainsPath
     }
     
-//    open func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL]
+    func checkDictionaryPath(path : URL?){
+        
+        guard let url = path else {
+            return
+        }
+        
+        var isDir : ObjCBool = ObjCBool(true)
+        let fm = FileManager.default
+        if fm.fileExists(atPath: url.absoluteString, isDirectory: &isDir){
+            if isDir.boolValue == false {
+                try? fm.removeItem(atPath: url.absoluteString)
+                try? fm.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+            }
+        }else{
+            try? fm.createDirectory(at: url, withIntermediateDirectories: true, attributes: nil)
+        }
+    }
+    
+    func removeFileAtPath(path : String?){
+        guard let sp = path else {
+            return
+        }
+        try? FileManager.default.removeItem(atPath: sp)
+    }
+    
+    func storageFile(_ fileData : Data?, atPath path : URL?){
+        guard let sp = path else {
+            return
+        }
+        guard fileData != nil else {
+            return
+        }
+        try? fileData?.write(to: sp, options: .withoutOverwriting)
+    }
+    
+    func getFile(atPath path : URL?) -> Data? {
+        guard let urlPath = path  else {
+            return nil
+        }
+        let data = try? Data.init(contentsOf: urlPath)
+        return data
+    }
 
+
+//    open func urls(for directory: FileManager.SearchPathDirectory, in domainMask: FileManager.SearchPathDomainMask) -> [URL]
+}
+
+
+// MARK: -- 项目相关
+extension MFileManager{
+    
+    func storageImage(_ image : UIImage?, withName name : String?){
+        guard let img = image, let pt = name else {
+            return
+        }
+        let path = storeDirPath.appendingPathComponent(pt)
+        if let imgData = img.pngData() {
+            storageFile(imgData, atPath: path)
+        }
+    }
+    
+    func getImage(named name : String?) -> UIImage?{
+        guard let pt = name else {
+            return nil
+        }
+        let path = storeDirPath.appendingPathComponent(pt)
+        if let data = getFile(atPath: path){
+            if let image = UIImage(data: data) {
+                return image
+            }
+        }
+        return nil
+    }
+
+    
 }
 
 

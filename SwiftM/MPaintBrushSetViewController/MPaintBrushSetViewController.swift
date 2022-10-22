@@ -7,6 +7,9 @@
 
 import UIKit
 
+typealias selectedColor = (UIColor?)->Void
+
+
 class MPaintBrushSetViewController: UIViewController {
     
     lazy var colorPreView : UIView = {
@@ -35,18 +38,44 @@ class MPaintBrushSetViewController: UIViewController {
         .systemPink
     ]
     
+    var selectorColor : selectedColor?
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .red
+        view.backgroundColor = .white
+        
+        
         loadSubViews()
         
         print("\(view.m_width)....\(view.m_height)")
+    }
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        colorPreView.m_width = view.m_width - colorPreView.m_left*2
+        var frame = CGRect(x: colorPreView.m_left, y: colorPreView.m_bottom + 30, width: (colorPreView.m_width+5)/CGFloat(buttons.count)-5, height: 40)
+        for button in buttons {
+            button.frame = frame
+            frame.origin.x = button.m_right+5
+        }
     }
 }
 
 extension MPaintBrushSetViewController{
     private func loadSubViews(){
+        
+        let button = UIButton(type: .system)
+        button.addTarget(self, action: #selector(commitAction), for: .touchUpInside)
+        button.frame = CGRect(x: 20, y: 20, width: 100, height: 30)
+        button.backgroundColor = .white
+        button.setTitle("确定", for: .normal)
+        button.setTitleColor(.systemBlue, for: .normal)
+        button.layer.borderColor = UIColor.systemBlue.cgColor
+        button.layer.borderWidth = 2.0
+        button.layer.cornerRadius = 5.0
+        view.addSubview(button)
+
         view.addSubview(colorPreView)
         loadButtons()
     }
@@ -54,21 +83,17 @@ extension MPaintBrushSetViewController{
     private func loadButtons(){
         var index : Int = 0
         
-        var frame = CGRect(x: colorPreView.m_left, y: colorPreView.m_bottom + 30, width: (colorPreView.m_width+5)/CGFloat(colors.count+1), height: 40)
         for color in colors{
             let button = UIButton(type: .system)
-            button.frame = frame
             button.addTarget(self, action: #selector(colorSelected(button:)), for: .touchUpInside)
             button.backgroundColor = color
             button.tag = index
             view.addSubview(button)
             index = index + 1
-            frame.origin.x = button.m_right + 5
             buttons.append(button)
         }
         
         let button = UIButton(type: .system)
-        button.frame = frame
         button.addTarget(self, action: #selector(colorSelected(button:)), for: .touchUpInside)
         button.backgroundColor = .white
         button.setTitle("更多", for: .normal)
@@ -78,7 +103,6 @@ extension MPaintBrushSetViewController{
         buttonMore = button
         buttons.append(buttonMore!)
         view.addSubview(buttonMore!)
-        
     }
     
     @objc func colorSelected(button : UIButton){
@@ -91,6 +115,13 @@ extension MPaintBrushSetViewController{
                 temp.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
                 colorPreView.backgroundColor = button.backgroundColor
             }
+        }
+    }
+    
+    @objc func commitAction(){
+        if selectorColor != nil {
+            let color : UIColor = colorPreView.backgroundColor!
+            selectorColor!(color)
         }
     }
 }

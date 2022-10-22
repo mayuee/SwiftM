@@ -16,6 +16,7 @@ class ViewController: UIViewController {
     
     var setView : MDrawingSetView?
     
+    /*
     lazy var colorView : MDrawingColorView = {
         let cv = MDrawingColorView()
         cv.setColor = {(color : UIColor?)->Void in
@@ -26,6 +27,7 @@ class ViewController: UIViewController {
         
         return cv
     }()
+ */
         
     override func loadView() {
         isLogin ? super.loadView() : setupVisitorView()

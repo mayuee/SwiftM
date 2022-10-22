@@ -16,7 +16,6 @@ class MDrawingBoard: UIView {
     ///当前 brush
     var curBrush : MBrush!
 
-    
     ///橡皮
     lazy var eraserBrush : MBrush = MBrush(color:.white, width: CGFloat(5.0), cat : .eraser)
     
@@ -108,6 +107,14 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
         
         if superController != nil {
             let paintSetVC = MPaintBrushSetViewController()
+            paintSetVC.selectorColor = {(color : UIColor?)->Void in
+                guard let setColor = color else{
+                    return
+                }
+                self.curBrush.color = setColor
+                self.superController?.dismiss(animated: true, completion: nil)
+            }
+
             superController?.present(paintSetVC, animated: true, completion: {
                 
             })
@@ -138,6 +145,7 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
             lineArray.removeAll()
             setNeedsDisplay()
         }
+        self.curBrush = paintBrush
     }
 }
 
