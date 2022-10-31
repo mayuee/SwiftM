@@ -9,6 +9,12 @@ import Foundation
 import UIKit
 
 class MFileManager: NSObject {
+    
+    /*static let sharedd : MFileManager  = {
+        //一些初始化
+        let fm = MFileManager()
+        return fm
+    }()*/
     //以下两行是单例实现
     static let shared = MFileManager()
     private override init(){}
@@ -19,20 +25,21 @@ class MFileManager: NSObject {
         checkDictionaryPath(path: dirPath)
         return dirPath
     }()
-    
-    
-    
 }
 
 // MARK: -- 公共方法
 extension MFileManager{
     func documentDirectory() -> URL {
+        
         let domainsArray = FileManager.default.urls(for:.documentDirectory, in: .userDomainMask)
         let domainsPath = domainsArray[0] as URL
+         
+        //let domainsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!
+
         return domainsPath
     }
     
-    func checkDictionaryPath(path : URL?){
+    private func checkDictionaryPath(path : URL?){
         
         guard let url = path else {
             return
@@ -50,24 +57,27 @@ extension MFileManager{
         }
     }
     
-    func removeFileAtPath(path : String?){
+    private func removeFileAtPath(path : String?){
         guard let sp = path else {
             return
         }
         try? FileManager.default.removeItem(atPath: sp)
     }
     
-    func storageFile(_ fileData : Data?, atPath path : URL?){
+    private func storageFile(_ fileData : Data?, atPath path : URL?){
         guard let sp = path else {
             return
         }
         guard fileData != nil else {
             return
         }
+//        if let data = fileData where data.count > 0 {
+//            try? fileData?.write(to: sp, options: .withoutOverwriting)
+//        }
         try? fileData?.write(to: sp, options: .withoutOverwriting)
     }
     
-    func getFile(atPath path : URL?) -> Data? {
+    private func getFile(atPath path : URL?) -> Data? {
         guard let urlPath = path  else {
             return nil
         }

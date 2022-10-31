@@ -17,7 +17,7 @@ class MDrawingBoard: UIView {
     var curBrush : MBrush!
 
     ///橡皮
-    lazy var eraserBrush : MBrush = MBrush(color:.white, width: CGFloat(5.0), cat : .eraser)
+    lazy var eraserBrush : MBrush = MBrush(color:.white, width: CGFloat(10.0), cat : .eraser)
     
     ///画的 线 的数组
     lazy var lineArray : Array = Array<MBrushLine>()
@@ -127,6 +127,10 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
     
     func eraserSelected() {
         curBrush = eraserBrush
+        
+        MDBClient.shared.getHistoryList()
+        return
+
     }
     
     func revokeSelected() {
@@ -138,6 +142,18 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
     
     func saveSelected() {
         #warning("todo save")
+        
+        let m = MHistoryModel()
+        MDBClient.shared.insertHistory(model: m)
+        return
+        
+        UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
+        // 绘制图片
+        self.layer.render(in: UIGraphicsGetCurrentContext()!)
+        let image = UIGraphicsGetImageFromCurrentImageContext();
+
+        let imageView = UIImageView(image: image)
+        UIApplication.shared.keyWindow?.addSubview(imageView)
     }
     
     func clearSelected() {
@@ -158,7 +174,8 @@ extension MDrawingBoard{
         currentLine = MBrushLine(color: curBrush.color, cat: curBrush.cat)
         if let touch = touches.first {
             let beginPoint = touch.location(in: self)
-            let lineWidth = curBrush.width * touch.force;
+            let force = touch.force > 0 ? touch.force : 1
+            let lineWidth = curBrush.width * force;
             currentLine!.addPoint(point: MBrushPoint(point: beginPoint, width: lineWidth))
             setNeedsDisplay()
         }
@@ -170,7 +187,8 @@ extension MDrawingBoard{
         
         if let touch = touches.first {
             let movePoint = touch.location(in: self)
-            let lineWidth = curBrush.width * touch.force;
+            let force = touch.force > 0 ? touch.force : 1
+            let lineWidth = curBrush.width * force;
             currentLine!.addPoint(point: MBrushPoint(point: movePoint, width: lineWidth))
             setNeedsDisplay()
         }
@@ -182,7 +200,8 @@ extension MDrawingBoard{
         
         if let touch = touches.first {
             let endPoint = touch.location(in: self)
-            let lineWidth = curBrush.width * touch.force;
+            let force = touch.force > 0 ? touch.force : 1
+            let lineWidth = curBrush.width * force;
             currentLine!.addPoint(point: MBrushPoint(point: endPoint, width: lineWidth))
         }
         if currentLine != nil {

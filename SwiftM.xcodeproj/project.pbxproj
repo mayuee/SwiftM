@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1915716C2910296B00C464E8 /* MHistoryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1915716B2910296B00C464E8 /* MHistoryModel.swift */; };
+		1915717229102F0D00C464E8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1915717129102EF000C464E8 /* libsqlite3.0.tbd */; };
+		1915717729102F1F00C464E8 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1915717629102F1500C464E8 /* libsqlite3.tbd */; };
+		191571842910300D00C464E8 /* MDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191571832910300D00C464E8 /* MDBClient.swift */; };
 		19BE846E28FF131C00BBD24A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE846D28FF131C00BBD24A /* AppDelegate.swift */; };
 		19BE847228FF131C00BBD24A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE847128FF131C00BBD24A /* ViewController.swift */; };
 		19BE847528FF131C00BBD24A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19BE847328FF131C00BBD24A /* Main.storyboard */; };
@@ -51,6 +55,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1915716B2910296B00C464E8 /* MHistoryModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MHistoryModel.swift; sourceTree = "<group>"; };
+		1915717129102EF000C464E8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
+		1915717629102F1500C464E8 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		191571832910300D00C464E8 /* MDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBClient.swift; sourceTree = "<group>"; };
 		19BE846A28FF131C00BBD24A /* SwiftM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19BE846D28FF131C00BBD24A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19BE847128FF131C00BBD24A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -88,6 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1915717729102F1F00C464E8 /* libsqlite3.tbd in Frameworks */,
+				1915717229102F0D00C464E8 /* libsqlite3.0.tbd in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -108,6 +118,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		1915717029102EF000C464E8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				1915717629102F1500C464E8 /* libsqlite3.tbd */,
+				1915717129102EF000C464E8 /* libsqlite3.0.tbd */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		19BE846128FF131C00BBD24A = {
 			isa = PBXGroup;
 			children = (
@@ -115,6 +134,7 @@
 				19BE848328FF133900BBD24A /* SwiftMTests */,
 				19BE848E28FF133900BBD24A /* SwiftMUITests */,
 				19BE846B28FF131C00BBD24A /* Products */,
+				1915717029102EF000C464E8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -173,6 +193,7 @@
 				19E97AA52902BC6500D062E5 /* MDrawedViewCell.swift */,
 				19E97AA02902BC0A00D062E5 /* MDrawedFlowLayout.swift */,
 				19E97A962901BD6900D062E5 /* MPresentationController.swift */,
+				1915716B2910296B00C464E8 /* MHistoryModel.swift */,
 			);
 			path = History;
 			sourceTree = "<group>";
@@ -212,6 +233,7 @@
 			isa = PBXGroup;
 			children = (
 				19E97A942901B1F900D062E5 /* MFileManager.swift */,
+				191571832910300D00C464E8 /* MDBClient.swift */,
 			);
 			path = MFileManager;
 			sourceTree = "<group>";
@@ -291,6 +313,7 @@
 				TargetAttributes = {
 					19BE846928FF131C00BBD24A = {
 						CreatedOnToolsVersion = 12.3;
+						LastSwiftMigration = 1230;
 					};
 					19BE847F28FF133900BBD24A = {
 						CreatedOnToolsVersion = 12.3;
@@ -360,6 +383,7 @@
 				19E97A672900510600D062E5 /* MDrawingBoard.swift in Sources */,
 				19E97AB92904373F00D062E5 /* UIColor+Ext.swift in Sources */,
 				19BE847228FF131C00BBD24A /* ViewController.swift in Sources */,
+				191571842910300D00C464E8 /* MDBClient.swift in Sources */,
 				19E97AA62902BC6500D062E5 /* MDrawedViewCell.swift in Sources */,
 				19E97A74290063C600D062E5 /* MBrushLine.swift in Sources */,
 				19E97AB12903002E00D062E5 /* MPaintBrushSetViewController.swift in Sources */,
@@ -372,6 +396,7 @@
 				19E97AA12902BC0A00D062E5 /* MDrawedFlowLayout.swift in Sources */,
 				19BE846E28FF131C00BBD24A /* AppDelegate.swift in Sources */,
 				19E97A912901A10600D062E5 /* MColorBox.swift in Sources */,
+				1915716C2910296B00C464E8 /* MHistoryModel.swift in Sources */,
 				19E97A972901BD6900D062E5 /* MPresentationController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -548,6 +573,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JH9HAGK8V;
 				INFOPLIST_FILE = SwiftM/Info.plist;
@@ -559,6 +585,7 @@
 				OTHER_SWIFT_FLAGS = "-D DEBUG";
 				PRODUCT_BUNDLE_IDENTIFIER = com.mazb.drawingboard;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -569,6 +596,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 2JH9HAGK8V;
 				INFOPLIST_FILE = SwiftM/Info.plist;

@@ -46,7 +46,7 @@ class ViewController: UIViewController {
 // MARK: - 正常
 extension ViewController{
     private func setupNav() {
-        self.title = "念念画画";
+        self.title = "画画";
         
         let nextItem = UIBarButtonItem(title:"历史", style: .plain, target: self, action: #selector(historyAction))
         self.navigationItem.rightBarButtonItem = nextItem;
