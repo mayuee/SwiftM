@@ -11,7 +11,15 @@ class MDrawedViewController: MBaseViewController {
 
     lazy var collectionView : UICollectionView = {
         
-        let frame = view.bounds
+        var frame = view.bounds
+        
+        if #available(iOS 11.0, *) {
+            if let safeAreaInsets = UIApplication.shared.keyWindow?.safeAreaInsets{
+                frame = CGRect(x: safeAreaInsets.left, y: safeAreaInsets.top, width: frame.size.width-safeAreaInsets.left-safeAreaInsets.right, height: frame.size.height-safeAreaInsets.top-safeAreaInsets.bottom)
+            }
+        } else {
+            // Fallback on earlier versions
+        }
 
         let layout = MDrawedFlowLayout.init()
         let width = (frame.size.width-50)/4
@@ -35,18 +43,21 @@ class MDrawedViewController: MBaseViewController {
         
     }()
     
-    var dataArray : Array = Array<Any>()
+    var dataArray : Array = Array<MHistoryModel>()
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        for index in 0..<20{
-            dataArray.append(index)
+        if let array = MDBClient.shared.getHistoryList(){
+            for ele in array {
+                dataArray.append(ele)
+            }
         }
-
-        collectionView.frame = view.bounds
+        
         view.addSubview(collectionView)
+        
+       
     }
 }
 
@@ -63,9 +74,19 @@ extension MDrawedViewController : UICollectionViewDelegate, UICollectionViewData
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cellIdentifier = "kReuseIdentifier"
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
-        cell.backgroundColor = .groupTableViewBackground
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath) as! MDrawedViewCell
+        var m = dataArray[indexPath.row]
+        cell.imageView.image = m.image
+        cell.titleLabel.text = m.title
+        
         return cell
+    }
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        var m = dataArray[indexPath.row]
+        let pre = MImageViewController()
+        pre.title = m.title
+        pre.image = m.image
+        self.navigationController?.pushViewController(pre, animated: true)
     }
     
     /*

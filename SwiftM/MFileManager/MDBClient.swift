@@ -34,19 +34,31 @@ extension MDBClient{
     
     func insertHistory(model : MHistoryModel){
     
-        let insertSQL = "INSERT INTO \(tableName) (createDate, title) VALUES (\"\(String(describing: model.createDate))\", \"\(model.title!)\");"
+        let insertSQL = "INSERT INTO \(tableName) (createDate, title) VALUES (\"\( model.createDate!)\", \"\(model.title!)\");"
         if execSQL(sql: insertSQL) {
             print("插入成功:\(String(describing: model.title))")
         }
     }
     
-    func getHistoryList() -> Void{
+    func getHistoryList() -> Array<MHistoryModel>?{
     
         let getSQL = "SELECT * FROM \(tableName);"
-        guard let array = query(sql: getSQL) else {
-            return
+        guard let result = query(sql: getSQL) else {
+            return nil
         }
-        print(array)
+        var array : Array<MHistoryModel> = Array()
+        for ele in result {
+            guard let title = ele["title"] else{
+                continue
+            }
+            guard let createDate = ele["createDate"] else{
+                continue
+            }
+            
+            let h = MHistoryModel(createDate: (createDate as! String), title: (title as! String))
+            array.append(h)
+        }
+        return array
     }
     
     func deleteHistory(model : MHistoryModel){

@@ -35,7 +35,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+//        self.edgesForExtendedLayout = []
+        
         setupNav()
         
         setupSubViews()
@@ -53,17 +54,24 @@ extension ViewController{
     }
     
     func setupSubViews(){
-        drawingBoard.frame = view.bounds
+        
+        var safeInset = UIEdgeInsets()
+        if #available(iOS 11.0, *) {
+            if let safeAreaInsets = UIApplication.shared.keyWindow?.safeAreaInsets{
+                safeInset = safeAreaInsets
+            }
+        }
+        
+        drawingBoard.frame = CGRect(x: safeInset.left, y: safeInset.top+44, width: view.m_width-safeInset.left-safeInset.right-60, height: view.m_height-safeInset.top-44-safeInset.bottom)
         drawingBoard.superController = self
         view.addSubview(drawingBoard)
         
-        setView = MDrawingSetView(frame: CGRect(x: view.m_width-60, y: 0, width: 60, height: view.m_height))
+        setView = MDrawingSetView(frame: CGRect(x: view.m_width-safeInset.right-60, y: drawingBoard.m_top, width: 60, height: drawingBoard.m_height))
         setView?.delegate = drawingBoard
         view.addSubview(setView!)
     }
     
     @objc func historyAction() {
-//        let history = MHistoryViewController()
         let drawed = MDrawedViewController()
         self.navigationController?.pushViewController(drawed, animated: true)
     }

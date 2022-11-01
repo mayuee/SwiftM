@@ -11,6 +11,7 @@
 		1915717229102F0D00C464E8 /* libsqlite3.0.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1915717129102EF000C464E8 /* libsqlite3.0.tbd */; };
 		1915717729102F1F00C464E8 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 1915717629102F1500C464E8 /* libsqlite3.tbd */; };
 		191571842910300D00C464E8 /* MDBClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 191571832910300D00C464E8 /* MDBClient.swift */; };
+		197C2D8429117641000DA1FD /* MImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 197C2D8329117641000DA1FD /* MImageViewController.swift */; };
 		19BE846E28FF131C00BBD24A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE846D28FF131C00BBD24A /* AppDelegate.swift */; };
 		19BE847228FF131C00BBD24A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19BE847128FF131C00BBD24A /* ViewController.swift */; };
 		19BE847528FF131C00BBD24A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 19BE847328FF131C00BBD24A /* Main.storyboard */; };
@@ -59,6 +60,7 @@
 		1915717129102EF000C464E8 /* libsqlite3.0.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.0.tbd; path = usr/lib/libsqlite3.0.tbd; sourceTree = SDKROOT; };
 		1915717629102F1500C464E8 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		191571832910300D00C464E8 /* MDBClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MDBClient.swift; sourceTree = "<group>"; };
+		197C2D8329117641000DA1FD /* MImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MImageViewController.swift; sourceTree = "<group>"; };
 		19BE846A28FF131C00BBD24A /* SwiftM.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SwiftM.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		19BE846D28FF131C00BBD24A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		19BE847128FF131C00BBD24A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -202,6 +204,7 @@
 			isa = PBXGroup;
 			children = (
 				19E97A5C290033FD00D062E5 /* Exten */,
+				197C2D8329117641000DA1FD /* MImageViewController.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -383,6 +386,7 @@
 				19E97A672900510600D062E5 /* MDrawingBoard.swift in Sources */,
 				19E97AB92904373F00D062E5 /* UIColor+Ext.swift in Sources */,
 				19BE847228FF131C00BBD24A /* ViewController.swift in Sources */,
+				197C2D8429117641000DA1FD /* MImageViewController.swift in Sources */,
 				191571842910300D00C464E8 /* MDBClient.swift in Sources */,
 				19E97AA62902BC6500D062E5 /* MDrawedViewCell.swift in Sources */,
 				19E97A74290063C600D062E5 /* MBrushLine.swift in Sources */,

@@ -10,7 +10,7 @@ import UIKit
 class MHistoryViewController: MBaseViewController {
 
     lazy var tableView : UITableView = UITableView()
-    var dataArray : Array = Array<Any>()
+    var dataArray : Array = Array<MHistoryModel>()
     
     
     var isPresent : Bool = true
@@ -24,11 +24,15 @@ class MHistoryViewController: MBaseViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        setupUI()
         
-        MLog(message: "aaaaa")
+        if let array = MDBClient.shared.getHistoryList(){
+            for ele in array {
+                dataArray.append(ele)
+            }
+        }
+       
+        setupUI()
     }
-    
 }
 
 extension MHistoryViewController{
@@ -46,7 +50,7 @@ extension MHistoryViewController{
 extension MHistoryViewController : UITableViewDelegate, UITableViewDataSource{
     // MARK: -- TableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 20//dataArray.count
+        return dataArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {

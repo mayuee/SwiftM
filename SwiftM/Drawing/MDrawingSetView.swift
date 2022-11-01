@@ -29,8 +29,9 @@ class MDrawingSetView: UIView {
 
     weak var delegate : MDrawingSetViewDelegate?
     
-    var segment : UISegmentedControl?
-
+    //记录当前选中的是画笔还是橡皮
+    var button_pen_eraser : UIButton?
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .lightGray
@@ -50,13 +51,15 @@ extension MDrawingSetView{
     func loadSubView(){
 
         let left : CGFloat = 5.0
-        var top : CGFloat = 84
+        var top : CGFloat = 10
         let w : CGFloat = self.m_width - 10.0
-        let h : CGFloat = (self.m_height-84-40) / 5.0
+        let h : CGFloat = (self.m_height-60) / 5.0
         let penButton = UIButton(type: .custom)
         penButton.frame = CGRect(x: left, y: top, width: w, height: h)
         penButton.setImage(UIImage(named: "pen"), for: .normal)
-        penButton.addTarget(self, action: #selector(penClick), for: .touchUpInside)
+        penButton.addTarget(self, action: #selector(penClick(button:)), for: .touchUpInside)
+        button_pen_eraser = penButton
+        penButton.backgroundColor = .yellow
         self.addSubview(penButton)
         
         
@@ -64,7 +67,7 @@ extension MDrawingSetView{
         let eraserButton = UIButton(type: .custom)
         eraserButton.frame = CGRect(x: left, y: top, width: w, height: h)
         eraserButton.setImage(UIImage(named: "eraser"), for: .normal)
-        eraserButton.addTarget(self, action: #selector(eraserClick), for: .touchUpInside)
+        eraserButton.addTarget(self, action: #selector(eraserClick(button:)), for: .touchUpInside)
         self.addSubview(eraserButton)
         
         top = eraserButton.m_bottom + 10;
@@ -91,13 +94,24 @@ extension MDrawingSetView{
     }
     
     //选择画笔
-    @objc func penClick(){
+    @objc func penClick(button : UIButton!){
         self.delegate?.pencilSelected()
+        if button_pen_eraser != button {
+            button_pen_eraser?.backgroundColor = .clear
+            button_pen_eraser = button
+            button_pen_eraser?.backgroundColor = .yellow
+        }
     }
     
     //橡皮
-    @objc func eraserClick(){
+    @objc func eraserClick(button : UIButton!){
         self.delegate?.eraserSelected()
+        if button_pen_eraser != button {
+            button_pen_eraser?.backgroundColor = .clear
+            button_pen_eraser = button
+            button_pen_eraser?.backgroundColor = .yellow
+        }
+
     }
     
     //撤销

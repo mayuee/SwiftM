@@ -33,6 +33,9 @@ class MDrawingBoard: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.backgroundColor = .white
+        self.layer.borderWidth = 1
+        self.layer.borderColor = UIColor.blue.cgColor
+
         curBrush = paintBrush
         eraserBrush.color = self.backgroundColor!
     }
@@ -109,6 +112,7 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
             let paintSetVC = MPaintBrushSetViewController()
             paintSetVC.selectorColor = {(color : UIColor?)->Void in
                 guard let setColor = color else{
+                    self.superController?.dismiss(animated: true, completion: nil)
                     return
                 }
                 self.curBrush.color = setColor
@@ -120,17 +124,11 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
             })
             
 //            XXXX.modalPresentationStyle = UIModalPresentationFullScreen;
-
-
         }
     }
     
     func eraserSelected() {
         curBrush = eraserBrush
-        
-        MDBClient.shared.getHistoryList()
-        return
-
     }
     
     func revokeSelected() {
@@ -141,19 +139,12 @@ extension MDrawingBoard : MDrawingSetViewDelegate{
     }
     
     func saveSelected() {
-        #warning("todo save")
-        
         let m = MHistoryModel()
-        MDBClient.shared.insertHistory(model: m)
-        return
-        
         UIGraphicsBeginImageContextWithOptions(self.bounds.size, false, 0.0)
-        // 绘制图片
         self.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext();
-
-        let imageView = UIImageView(image: image)
-        UIApplication.shared.keyWindow?.addSubview(imageView)
+        MFileManager.shared.storageImage(image, withName: m.createDate)
+        MDBClient.shared.insertHistory(model: m)
     }
     
     func clearSelected() {

@@ -30,6 +30,5 @@ class MBrush: NSObject {
         self.color = color
         self.width = width
         self.cat = cat
-        
     }
 }

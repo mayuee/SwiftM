@@ -7,7 +7,7 @@
 
 import UIKit
 
-typealias selectedColor = (UIColor?)->Void
+typealias SelectedColor = (UIColor?)->Void
 
 
 class MPaintBrushSetViewController: UIViewController {
@@ -22,6 +22,8 @@ class MPaintBrushSetViewController: UIViewController {
     
     var buttons : Array = Array<UIButton>()
     var buttonMore : UIButton?
+    
+    var selected : Bool = false
     
     let colors : Array<UIColor> = [
         .black,
@@ -38,7 +40,7 @@ class MPaintBrushSetViewController: UIViewController {
         .systemPink
     ]
     
-    var selectorColor : selectedColor?
+    var selectorColor : SelectedColor?
     
     
     override func viewDidLoad() {
@@ -67,7 +69,7 @@ extension MPaintBrushSetViewController{
         
         let button = UIButton(type: .system)
         button.addTarget(self, action: #selector(commitAction), for: .touchUpInside)
-        button.frame = CGRect(x: 20, y: 20, width: 100, height: 30)
+        button.frame = CGRect(x: view.m_width-100, y: 30, width: 100, height: 30)
         button.backgroundColor = .white
         button.setTitle("确定", for: .normal)
         button.setTitleColor(.systemBlue, for: .normal)
@@ -106,7 +108,7 @@ extension MPaintBrushSetViewController{
     }
     
     @objc func colorSelected(button : UIButton){
-        
+        selected = true
         for temp in buttons{
             if button.tag != temp.tag  {
                 temp.transform = CGAffineTransform.identity
@@ -120,7 +122,10 @@ extension MPaintBrushSetViewController{
     
     @objc func commitAction(){
         if selectorColor != nil {
-            let color : UIColor = colorPreView.backgroundColor!
+            var color : UIColor? = nil
+            if selected {
+                color = colorPreView.backgroundColor!
+            }
             selectorColor!(color)
         }
     }
