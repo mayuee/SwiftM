@@ -43,13 +43,99 @@ class MImageViewController: UIViewController {
     
     var image : UIImage?
     
+    var deleteBlock : (()->Void)?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
 
+        let nextItem = UIBarButtonItem(title:"更多", style: .plain, target: self, action: #selector(moreAction))
+        self.navigationItem.rightBarButtonItem = nextItem;
+
+        
         loadSubViews()
     }
     
+    
+    
+}
+
+// MARK: 更多
+extension MImageViewController{
+    @objc private func moreAction(){
+        let actionSheet = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        let shareAction = UIAlertAction(title: "分享", style: .default) { [self] (action : UIAlertAction) in
+            shareEvent()
+        }
+        let saveAction = UIAlertAction(title: "保存", style: .default) { (action : UIAlertAction) in
+            
+            self.saveEvent()
+        }
+        let deleteAction = UIAlertAction(title: "删除", style: .default) { (action : UIAlertAction) in
+            self.deleteEvent()
+        }
+        let cancelAction = UIAlertAction(title: "取消", style: .default) { (action : UIAlertAction) in
+            
+        }
+
+        actionSheet.addAction(shareAction)
+        actionSheet.addAction(saveAction)
+        actionSheet.addAction(deleteAction)
+        actionSheet.addAction(cancelAction)
+
+        self.present(actionSheet, animated: true, completion: nil)
+    }
+    
+    private func shareEvent(){
+        
+        guard let img = image else {
+            return
+        }
+        let activity = UIActivityViewController(activityItems: [img, "念念涂鸦"], applicationActivities: nil)
+        activity.excludedActivityTypes?.append(.airDrop)
+        activity.excludedActivityTypes?.append(.copyToPasteboard)
+        activity.excludedActivityTypes?.append(.saveToCameraRoll)
+        activity.completionWithItemsHandler = { (activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) -> Void in
+            if completed == true {
+                print("Saved")
+            }
+        }
+        self.present(activity, animated: true, completion: nil)
+    }
+    
+    private func saveEvent(){
+        guard let img = image else {
+            return
+        }
+        UIImageWriteToSavedPhotosAlbum(img, self, #selector(save(image:didFinishSavingWithError:contextInfo:)), nil)
+    }
+    
+    private func deleteEvent(){
+        if self.deleteBlock != nil {
+            self.deleteBlock!()
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
+
+    
+    //照片保存回调
+    @objc func save(image:UIImage, didFinishSavingWithError:NSError?,contextInfo:AnyObject) {
+        
+        if didFinishSavingWithError != nil {
+            print("保存失败")
+        } else {
+            let alert = UIAlertController(title: "保存成功", message: nil, preferredStyle: .alert)
+            let cancelAction = UIAlertAction(title: "确定", style: .default) { (action : UIAlertAction) in
+            }
+            alert.addAction(cancelAction)
+            self.present(alert, animated: true, completion: nil)
+        }
+    }
+}
+
+
+
+extension MImageViewController{
     private func loadSubViews(){
         scrollView.addSubview(imageView)
         view.addSubview(scrollView)
@@ -92,7 +178,6 @@ class MImageViewController: UIViewController {
         scrollView.contentSize = imageView.frame.size
     }
     
-
     @objc func tapAction(gesture : UITapGestureRecognizer!){
         
         var toscale = 0;

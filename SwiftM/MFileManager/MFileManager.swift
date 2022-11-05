@@ -57,11 +57,12 @@ extension MFileManager{
         }
     }
     
-    private func removeFileAtPath(path : String?){
+    private func removeFileAtPath(path : URL?){
         guard let sp = path else {
             return
         }
-        try? FileManager.default.removeItem(atPath: sp)
+//        let exist = FileManager.default.fileExists(atPath:sp.path)
+        try? FileManager.default.removeItem(at: sp)
     }
     
     private func storageFile(_ fileData : Data?, atPath path : URL?){
@@ -71,6 +72,7 @@ extension MFileManager{
         guard fileData != nil else {
             return
         }
+        print(path!)
 //        if let data = fileData where data.count > 0 {
 //            try? fileData?.write(to: sp, options: .withoutOverwriting)
 //        }
@@ -115,8 +117,14 @@ extension MFileManager{
         }
         return nil
     }
-
     
+    func deleteImage(named name : String?) -> Void{
+        guard let pt = name else {
+            return
+        }
+        let path = storeDirPath.appendingPathComponent(pt)
+        removeFileAtPath(path: path)
+    }
 }
 
 

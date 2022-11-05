@@ -26,7 +26,6 @@ class MDrawedViewController: MBaseViewController {
         layout.itemSize = CGSize(width: (frame.size.width-50)/4, height: width * 0.6)
         //layout.footerReferenceSize = CGSize(width: screenWidth, height: 50)
         //layout.headerReferenceSize = CGSize(width: screenWidth, height: 50)
-
 //        layout.itemSize = CGSizeMake((frame.size.width - flowLayout.margin)/2.0, 180);
         let collectionView = UICollectionView(frame: view.bounds, collectionViewLayout: layout)
         collectionView.register(MDrawedViewCell.classForCoder(), forCellWithReuseIdentifier: "kReuseIdentifier")
@@ -45,6 +44,7 @@ class MDrawedViewController: MBaseViewController {
     
     var dataArray : Array = Array<MHistoryModel>()
 
+    var curIndex : Int = Int(MAXINTERP)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,8 +56,17 @@ class MDrawedViewController: MBaseViewController {
         }
         
         view.addSubview(collectionView)
-        
-       
+    }
+    
+    private func deleteImage(){
+        if curIndex < dataArray.count {
+            let model = dataArray[curIndex]
+            MFileManager.shared.deleteImage(named: model.createDate)
+            MDBClient.shared.deleteHistory(model: model)
+            dataArray.remove(at: curIndex)
+            curIndex = Int(MAXINTERP)
+            collectionView.reloadData()
+        }
     }
 }
 
@@ -86,6 +95,10 @@ extension MDrawedViewController : UICollectionViewDelegate, UICollectionViewData
         let pre = MImageViewController()
         pre.title = m.title
         pre.image = m.image
+        curIndex = indexPath.row
+        pre.deleteBlock = {()->Void in
+            self.deleteImage()
+        }
         self.navigationController?.pushViewController(pre, animated: true)
     }
     

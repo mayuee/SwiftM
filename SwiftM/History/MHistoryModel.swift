@@ -32,7 +32,7 @@ struct MHistoryModel {
     
     static var formatter : DateFormatter{
         let f = DateFormatter()
-        f.dateFormat = "yyyy.MM.dd-HH:mm:ss"
+        f.dateFormat = "yyyy-MM-dd-HH-mm-ss"
         return f
     }
     

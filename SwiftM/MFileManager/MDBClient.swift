@@ -36,7 +36,7 @@ extension MDBClient{
     
         let insertSQL = "INSERT INTO \(tableName) (createDate, title) VALUES (\"\( model.createDate!)\", \"\(model.title!)\");"
         if execSQL(sql: insertSQL) {
-            print("插入成功:\(String(describing: model.title))")
+            print("插入成功:\(model.title!)")
         }
     }
     
@@ -62,18 +62,18 @@ extension MDBClient{
     }
     
     func deleteHistory(model : MHistoryModel){
-        
-        let deleteSQL = "DELETE FROM \(tableName) WHERE createDate = \(String(describing: model.createDate));"
+        let deleteSQL = "DELETE FROM \(tableName) WHERE createDate = \"\(model.createDate!)\";"
+
         if execSQL(sql: deleteSQL) {
-            print("删除成功:\(String(describing: model.title))")
+            print("删除成功:\(model.title!)")
         }
     }
     
     func updateHistory(model : MHistoryModel){
         
-        let updateSQL = "UPDATE \(tableName) SET title = \(String(describing: model.title)) WHERE createDate = \(String(describing: model.createDate));"
+        let updateSQL = "UPDATE \(tableName) SET title = \( model.title!) WHERE createDate = \"\(model.createDate!)\";"
         if execSQL(sql: updateSQL) {
-            print("修改成功:\(String(describing: model.title))")
+            print("修改成功:\(model.title!)")
         }
     }
 
